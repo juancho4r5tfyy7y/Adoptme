@@ -1,0 +1,161 @@
+/* ADOPT ME — estilos sobre Bootstrap 5. Tokens tomados del prototipo existente. */
+:root{
+  /* Tokens de marca */
+  --cream:#FAF6EF;--cream-2:#F1EAE0;--dark:#2E1D14;--dark-2:#3D281C;
+  --orange:#E06D3B;--orange-2:#C85A2C;--orange-tint:#FBE4D8;
+  --taupe:#8C827A;--taupe-dark:#706862;--taupe-tint:#EAE6E1;
+  --radius:20px;--radius-sm:12px;
+  --shadow:0 10px 30px rgba(46,29,20,.08);--shadow-lg:0 20px 50px rgba(46,29,20,.16);
+
+  /* Variables nativas Bootstrap 5.3.9 — Colores de marca y tema */
+  --bs-primary:var(--orange);
+  --bs-primary-rgb:224,109,59;
+  --bs-primary-text-emphasis:var(--orange-2);
+  --bs-primary-bg-subtle:var(--orange-tint);
+  --bs-primary-border-subtle:var(--orange-tint);
+
+  --bs-secondary:var(--taupe-dark);
+  --bs-secondary-rgb:112,104,98;
+  --bs-secondary-color:var(--taupe-dark);
+  --bs-secondary-bg-subtle:var(--taupe-tint);
+  --bs-secondary-border-subtle:var(--taupe-tint);
+
+  --bs-dark:var(--dark);
+  --bs-dark-rgb:46,29,20;
+  --bs-dark-text-emphasis:var(--dark-2);
+
+  --bs-body-bg:var(--cream);
+  --bs-body-color:var(--dark);
+  --bs-body-font-family:'Inter',sans-serif;
+  --bs-link-color:var(--orange-2);
+  --bs-link-hover-color:var(--dark);
+  --bs-border-radius:12px;
+  --bs-focus-ring-color:rgba(224,109,59,.25);
+}
+h1,h2,h3,h4,h5,.display-font{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+a{text-decoration:none}
+:focus-visible{outline:2px solid var(--orange-2)!important;outline-offset:2px}
+.text-taupe{color:var(--taupe-dark)!important}
+
+/* Botones */
+.btn{border-radius:999px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;padding:.6rem 1.3rem}
+.btn-sm{padding:.4rem .9rem;font-size:.82rem}
+.btn-primary{
+  --bs-btn-color:#fff;
+  --bs-btn-bg:var(--orange);
+  --bs-btn-border-color:var(--orange);
+  --bs-btn-hover-color:#fff;
+  --bs-btn-hover-bg:var(--orange-2);
+  --bs-btn-hover-border-color:var(--orange-2);
+  --bs-btn-focus-shadow-rgb:224,109,59;
+  --bs-btn-active-color:#fff;
+  --bs-btn-active-bg:var(--orange-2);
+  --bs-btn-active-border-color:var(--orange-2);
+  --bs-btn-disabled-color:#fff;
+  --bs-btn-disabled-bg:var(--orange);
+  --bs-btn-disabled-border-color:var(--orange);
+  box-shadow:0 6px 16px rgba(224,109,59,.3);
+}
+.btn-dark{
+  --bs-btn-color:var(--cream);
+  --bs-btn-bg:var(--dark);
+  --bs-btn-border-color:var(--dark);
+  --bs-btn-hover-color:var(--cream);
+  --bs-btn-hover-bg:var(--dark-2);
+  --bs-btn-hover-border-color:var(--dark-2);
+  --bs-btn-active-color:var(--cream);
+  --bs-btn-active-bg:var(--dark-2);
+  --bs-btn-active-border-color:var(--dark-2);
+}
+.btn-outline-dark{
+  --bs-btn-color:var(--dark);
+  --bs-btn-border-color:var(--taupe);
+  --bs-btn-hover-color:var(--cream);
+  --bs-btn-hover-bg:var(--dark);
+  --bs-btn-hover-border-color:var(--dark);
+  --bs-btn-active-color:var(--cream);
+  --bs-btn-active-bg:var(--dark);
+  --bs-btn-active-border-color:var(--dark);
+}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--taupe-tint);background:#fff;color:var(--dark);display:inline-flex;align-items:center;justify-content:center;padding:0;transition:.15s}
+.icon-btn:hover,.icon-btn.active{border-color:var(--orange);color:var(--orange)}
+
+/* Logo y navbar */
+.logo{display:inline-flex;align-items:center;gap:10px;font:800 1.25rem 'Plus Jakarta Sans',sans-serif;color:var(--dark)}
+.logo .me{color:var(--orange)}
+.navbar-adopt{position:sticky;top:0;z-index:1030;background:rgba(250,246,239,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--taupe-tint)}
+.navbar-adopt .nav-link{font-weight:600;color:var(--dark-2);border-radius:999px;padding:.5rem 1rem}
+.navbar-adopt .nav-link:hover{background:var(--taupe-tint)}
+.navbar-adopt .nav-link.active{background:var(--dark);color:var(--cream)}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}
+.dropdown-menu{border:1px solid var(--taupe-tint);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:.5rem}
+.dropdown-item{border-radius:8px;font-weight:600;font-size:.9rem}
+
+/* Panel con barra lateral */
+.sidebar{width:250px;flex-shrink:0}
+@media(min-width:992px){.sidebar{position:sticky;top:67px;height:calc(100vh - 67px);overflow-y:auto}}
+.side-link{display:flex;align-items:center;gap:12px;padding:.7rem .8rem;border-radius:var(--radius-sm);font-weight:600;font-size:.92rem;color:var(--dark-2);margin-bottom:2px}
+.side-link:hover{background:var(--cream-2)}
+.side-link.active{background:var(--dark);color:var(--cream)}
+.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.page-head h1{font-size:1.75rem;margin:0}
+
+/* Tarjetas */
+.card-adopt{background:#fff;border:0;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem}
+.stat-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+.stat-card .num{font:800 2rem 'Plus Jakarta Sans',sans-serif}
+.stat-card .lbl{font-size:.82rem;font-weight:600;color:var(--taupe)}
+.stat-card.accent{background:var(--dark)}.stat-card.accent .num{color:var(--cream)}.stat-card.accent .lbl{color:var(--taupe-tint)}
+.section-title-sm{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--taupe);font-weight:700;margin-bottom:.9rem}
+.list-line{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.7rem 0;border-bottom:1px solid var(--cream-2);font-size:.92rem}
+.list-line:last-child{border-bottom:0}
+
+/* Mascotas */
+.pet-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;position:relative;height:100%}
+.pet-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pet-photo{height:190px;position:relative}
+.pet-art-img{width:100%;height:100%;object-fit:cover;display:block}
+.pet-art{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.pet-fav{position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,.92)}
+.pet-fav.active{color:var(--orange)}
+.pet-card .stretched-link::after{z-index:1}
+.pet-fav{z-index:3}
+.detail-photo{height:380px;border-radius:var(--radius);overflow:hidden}
+.info-item{background:var(--cream-2);border-radius:var(--radius-sm);padding:.8rem 1rem}
+.info-item .k{font-size:.7rem;color:var(--taupe);font-weight:700;text-transform:uppercase}
+.info-item .v{font-weight:700}
+
+/* Insignias de estado */
+.badge-estado{font-weight:800;font-size:.72rem;padding:.4rem .7rem;border-radius:999px}
+.badge-disponible,.badge-publicado,.badge-aprobada,.badge-activo{background:var(--orange-tint);color:var(--orange-2)}
+.badge-en-proceso,.badge-pendiente{background:var(--taupe-tint);color:var(--dark-2)}
+.badge-adoptado,.badge-rechazada{background:var(--dark);color:var(--cream)}
+.badge-pausado,.badge-inactivo{background:var(--taupe-tint);color:var(--taupe)}
+.badge-borrador{background:transparent;border:1.5px dashed var(--taupe);color:var(--taupe)}
+
+/* Formularios */
+.form-control,.form-select{border:1.5px solid var(--taupe-tint);padding:.7rem .9rem}
+.form-control:focus,.form-select:focus{border-color:var(--orange);box-shadow:0 0 0 .2rem rgba(224,109,59,.15)}
+.form-check-input:checked{background-color:var(--orange);border-color:var(--orange)}
+.form-label{font-weight:700;font-size:.85rem}
+.dashed-drop{border:2px dashed var(--taupe-tint);border-radius:var(--radius-sm);padding:1.8rem;text-align:center;color:var(--taupe);font-size:.85rem}
+.nav-tabs .nav-link{font-weight:700;color:var(--taupe)}.nav-tabs .nav-link.active{color:var(--dark);border-color:transparent transparent var(--orange);background:none;border-bottom:2px solid var(--orange)}
+
+/* Tablas */
+.table-adopt{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.table-adopt th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--taupe);padding:1rem}
+.table-adopt td{padding:.9rem 1rem;vertical-align:middle}
+
+/* Seguimiento (stepper) */
+.track{display:flex;justify-content:space-between;position:relative;margin:1.6rem 0 .5rem}
+.track::before{content:'';position:absolute;top:17px;left:8%;right:8%;height:2px;background:var(--taupe-tint)}
+.track-step{position:relative;flex:1;text-align:center;font-size:.78rem;font-weight:700;color:var(--taupe)}
+.track-dot{width:36px;height:36px;border-radius:50%;background:var(--taupe-tint);margin:0 auto .4rem;display:flex;align-items:center;justify-content:center;border:4px solid var(--cream)}
+.track-step.done{color:var(--dark)}.track-step.done .track-dot{background:var(--orange);color:#fff}.track-step.bad .track-dot{background:var(--dark);color:var(--orange-tint)}
+
+/* Landing y autenticación */
+.auth-shell{background:radial-gradient(circle at 20% 20%,var(--orange-tint),transparent 45%),var(--cream)}
+.notif{display:flex;gap:14px;padding:1rem;border-radius:var(--radius-sm)}.notif.unread{background:var(--orange-tint)}
+.notif .ic{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.toast{border:0;border-radius:var(--radius-sm);background:var(--dark);color:var(--cream);font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

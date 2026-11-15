@@ -1,0 +1,5 @@
+<?php /** Gestión de usuarios: activar/desactivar (visual). */ ?>
+<div class="page-head"><div><h1>Gestión de usuarios</h1><p class="text-taupe mb-0">Usuarios registrados en la plataforma</p></div></div>
+<div class="table-adopt table-responsive"><table class="table mb-0 align-middle"><thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Registro</th><th>Estado</th><th>Acción</th></tr></thead><tbody>
+<?php foreach ($usuarios as $u): ?><tr><td><b><?= e($u['nombre']) ?></b></td><td><?= e($u['email']) ?></td><td><?= e($u['telefono']) ?></td><td><?= e($u['fecha']) ?></td><td><?= badge($u['estado']) ?></td>
+  <td><button class="btn btn-sm <?= $u['estado'] === 'activo' ? 'btn-outline-dark' : 'btn-primary' ?>" data-confirm="¿Cambiar el estado de la cuenta de <?= e($u['nombre']) ?>?" data-confirm-title="<?= $u['estado'] === 'activo' ? 'Desactivar' : 'Activar' ?> usuario" data-toast="Estado de la cuenta actualizado"><?= $u['estado'] === 'activo' ? 'Desactivar' : 'Activar' ?></button></td></tr><?php endforeach; ?></tbody></table></div>

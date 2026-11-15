@@ -1,0 +1,114 @@
+/* ADOPT ME — Tema de marca y ajustes globales sobre Bootstrap 5. */
+:root {
+    /* Colores de marca */
+    --cream: #FAF6EF;
+    --cream-2: #F1EAE0;
+    --dark: #2E1D14;
+    --dark-2: #3D281C;
+    --orange: #E06D3B;
+    --orange-2: #C85A2C;
+    --orange-tint: #FBE4D8;
+    --taupe: #8C827A;
+    --taupe-dark: #706862;
+    --taupe-tint: #EAE6E1;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 10px 30px rgba(46, 29, 20, .08);
+    --shadow-lg: 0 20px 50px rgba(46, 29, 20, .16);
+
+    /* Variables de Bootstrap 5.3.9 */
+    --bs-primary: var(--orange);
+    --bs-primary-rgb: 224, 109, 59;
+    --bs-primary-text-emphasis: var(--orange-2);
+    --bs-primary-bg-subtle: var(--orange-tint);
+    --bs-primary-border-subtle: var(--orange-tint);
+    --bs-secondary: var(--taupe-dark);
+    --bs-secondary-rgb: 112, 104, 98;
+    --bs-secondary-color: var(--taupe-dark);
+    --bs-secondary-bg-subtle: var(--taupe-tint);
+    --bs-secondary-border-subtle: var(--taupe-tint);
+    --bs-dark: var(--dark);
+    --bs-dark-rgb: 46, 29, 20;
+    --bs-dark-text-emphasis: var(--dark-2);
+    --bs-body-bg: var(--cream);
+    --bs-body-color: var(--dark);
+    --bs-body-font-family: 'Inter', sans-serif;
+    --bs-link-color: var(--orange-2);
+    --bs-link-hover-color: var(--dark);
+    --bs-border-radius: 12px;
+    --bs-focus-ring-color: rgba(224, 109, 59, .25);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.display-font {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    line-height: 1.15;
+}
+
+a {
+    text-decoration: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--orange-2) !important;
+    outline-offset: 2px;
+}
+
+/* Botones */
+.btn {
+    border-radius: 999px;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: .6rem 1.3rem;
+}
+
+.btn-sm {
+    padding: .4rem .9rem;
+    font-size: .82rem;
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--orange);
+    --bs-btn-border-color: var(--orange);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--orange-2);
+    --bs-btn-hover-border-color: var(--orange-2);
+    --bs-btn-focus-shadow-rgb: 224, 109, 59;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--orange-2);
+    --bs-btn-active-border-color: var(--orange-2);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--orange);
+    --bs-btn-disabled-border-color: var(--orange);
+    box-shadow: 0 6px 16px rgba(224, 109, 59, .3);
+}
+
+.btn-dark {
+    --bs-btn-color: var(--cream);
+    --bs-btn-bg: var(--dark);
+    --bs-btn-border-color: var(--dark);
+    --bs-btn-hover-color: var(--cream);
+    --bs-btn-hover-bg: var(--dark-2);
+    --bs-btn-hover-border-color: var(--dark-2);
+    --bs-btn-active-color: var(--cream);
+    --bs-btn-active-bg: var(--dark-2);
+    --bs-btn-active-border-color: var(--dark-2);
+}
+
+.btn-outline-dark {
+    --bs-btn-color: var(--dark);
+    --bs-btn-border-color: var(--taupe);
+    --bs-btn-hover-color: var(--cream);
+    --bs-btn-hover-bg: var(--dark);
+    --bs-btn-hover-border-color: var(--dark);
+    --bs-btn-active-color: var(--cream);
+    --bs-btn-active-bg: var(--dark);
+    --bs-btn-active-border-color: var(--dark);
+}

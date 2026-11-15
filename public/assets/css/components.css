@@ -1,0 +1,318 @@
+/* Componentes reutilizables de ADOPT ME. */
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--taupe-tint);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: .15s;
+}
+
+.icon-btn:hover,
+.icon-btn.active {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+/* Logo y navegación */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font: 800 1.25rem 'Plus Jakarta Sans', sans-serif;
+    color: var(--dark);
+}
+
+.logo .me {
+    color: var(--orange);
+}
+
+.navbar-adopt {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background: rgba(250, 246, 239, .94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--taupe-tint);
+}
+
+.navbar-adopt .nav-link {
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    color: var(--dark-2);
+    font-weight: 600;
+}
+
+.navbar-adopt .nav-link:hover {
+    background: var(--taupe-tint);
+}
+
+.navbar-adopt .nav-link.active {
+    background: var(--dark);
+    color: var(--cream);
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .8rem;
+}
+
+.dropdown-menu {
+    border: 1px solid var(--taupe-tint);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    padding: .5rem;
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+/* Panel lateral */
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        position: sticky;
+        top: 67px;
+        height: calc(100vh - 67px);
+        overflow-y: auto;
+    }
+}
+
+.side-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: .7rem .8rem;
+    margin-bottom: 2px;
+    border-radius: var(--radius-sm);
+    color: var(--dark-2);
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+.side-link:hover {
+    background: var(--cream-2);
+}
+
+.side-link.active {
+    background: var(--dark);
+    color: var(--cream);
+}
+
+/* Tarjetas de mascotas */
+.pet-card {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow);
+    transition: transform .18s, box-shadow .18s;
+}
+
+.pet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.pet-photo {
+    position: relative;
+    height: 190px;
+}
+
+.pet-art-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pet-art--orange {
+    background: #FBE4D8;
+}
+
+.pet-art--cream {
+    background: #F1EAE0;
+}
+
+.pet-art--taupe {
+    background: #EAE6E1;
+}
+
+.pet-fav {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    background: rgba(255, 255, 255, .92);
+}
+
+.pet-fav.active {
+    color: var(--orange);
+}
+
+.pet-card .stretched-link::after {
+    z-index: 1;
+}
+
+.detail-photo {
+    height: 380px;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
+/* Insignias de estado */
+.badge-estado {
+    padding: .4rem .7rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: .72rem;
+}
+
+.badge-disponible,
+.badge-publicado,
+.badge-aprobada,
+.badge-activo {
+    background: var(--orange-tint);
+    color: var(--orange-2);
+}
+
+.badge-en-proceso,
+.badge-pendiente {
+    background: var(--taupe-tint);
+    color: var(--dark-2);
+}
+
+.badge-adoptado,
+.badge-rechazada {
+    background: var(--dark);
+    color: var(--cream);
+}
+
+.badge-pausado,
+.badge-inactivo {
+    background: var(--taupe-tint);
+    color: var(--taupe);
+}
+
+.badge-borrador {
+    border: 1.5px dashed var(--taupe);
+    background: transparent;
+    color: var(--taupe);
+}
+
+/* Formularios */
+.form-control,
+.form-select {
+    border: 1.5px solid var(--taupe-tint);
+    padding: .7rem .9rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 .2rem rgba(224, 109, 59, .15);
+}
+
+.form-check-input:checked {
+    background-color: var(--orange);
+    border-color: var(--orange);
+}
+
+.form-label {
+    font-weight: 700;
+    font-size: .85rem;
+}
+
+.nav-tabs .nav-link {
+    color: var(--taupe);
+    font-weight: 700;
+}
+
+.nav-tabs .nav-link.active {
+    border-color: transparent transparent var(--orange);
+    border-bottom: 2px solid var(--orange);
+    background: none;
+    color: var(--dark);
+}
+
+/* Seguimiento */
+.track {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 1.6rem 0 .5rem;
+}
+
+.track::before {
+    content: '';
+    position: absolute;
+    top: 17px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: var(--taupe-tint);
+}
+
+.track-step {
+    position: relative;
+    flex: 1;
+    color: var(--taupe);
+    text-align: center;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.track-dot {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto .4rem;
+    border: 4px solid var(--cream);
+    border-radius: 50%;
+    background: var(--taupe-tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-step.done {
+    color: var(--dark);
+}
+
+.track-step.done .track-dot {
+    background: var(--orange);
+    color: #fff;
+}
+
+.track-step.bad .track-dot {
+    background: var(--dark);
+    color: var(--orange-tint);
+}
