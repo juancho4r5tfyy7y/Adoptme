@@ -1,4 +1,12 @@
-<?php /** Catálogo con filtros (JS en el navegador). Si hay sesión se muestra dentro del panel. */ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo</title>
+</head>
+<body>
+  <?php /** Catálogo con filtros (JS en el navegador). Si hay sesión se muestra dentro del panel. */ ?>
 <div class="<?= $user ? '' : 'container-xl pt-4' ?>">
   <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Catálogo de mascotas</h1><p class="text-secondary mb-0" id="f-count"></p></div></div>
   <div class="card border-0 shadow-sm rounded-4 p-3 mb-3"><div class="row g-2">
@@ -14,3 +22,6 @@
   <div id="catalogo-grid" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"><?php foreach ($mascotas as $m) include APP_PATH . '/views/partials/pet_card.php'; ?></div>
   <div id="f-vacio" class="text-center py-5 d-none"><i class="bi bi-search fs-1 text-secondary"></i><h3 class="h5 mt-2">No encontramos mascotas con esos filtros</h3><p class="text-secondary">Prueba quitando algún filtro.</p></div>
 </div>
+
+</body>
+</html>
