@@ -1,4 +1,12 @@
-<?php /** Página de inicio: propuesta de valor, mascotas destacadas, pasos y llamada a refugios. */ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdoptMe</title>
+</head>
+<body>
+  // Página de inicio: propuesta de valor, mascotas destacadas, pasos y llamada a refugios.
 <section class="py-5 my-2"><div class="container-xl"><div class="row align-items-center g-5">
   <div class="col-lg-6">
     <span class="badge rounded-pill text-bg-warning-subtle text-primary-emphasis px-3 py-2 fw-bold mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-heart-fill"></i> Plataforma de adopción responsable</span>
@@ -31,3 +39,6 @@
   <h2 class="h3 mb-2 text-white">¿Tienes un refugio o eres rescatista?</h2><p class="text-white-50">Publica tus mascotas, gestiona solicitudes y encuentra hogares responsables.</p>
   <a class="btn btn-primary" href="<?= url('registro') ?>">Registrar mi refugio</a>
 </div></div></section>
+
+</body>
+</html>

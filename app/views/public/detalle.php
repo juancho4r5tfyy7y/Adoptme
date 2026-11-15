@@ -1,4 +1,12 @@
-<?php /** Detalle de una mascota. $m = mascota, $refugio = refugio responsable. */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle</title>
+</head>
+<body>
+  <?php /** Detalle de una mascota. $m = mascota, $refugio = refugio responsable. */
 $disp = $m['estado'] === 'disponible'; ?>
 <div class="<?= $user ? '' : 'container-xl pt-4' ?>">
   <nav class="small fw-bold text-secondary mb-3"><a href="<?= url('catalogo') ?>">Catálogo</a> / <span class="text-dark"><?= e($m['nombre']) ?></span></nav>
@@ -25,3 +33,6 @@ $disp = $m['estado'] === 'disponible'; ?>
   <div class="modal-body p-4"><h3 class="h5">Contactar a <?= e($refugio['nombre'] ?? 'el refugio') ?></h3>
     <textarea class="form-control my-3" rows="4" required placeholder="Hola, quisiera más información sobre <?= e($m['nombre']) ?>..."></textarea>
     <div class="d-flex justify-content-end gap-2"><button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-primary" data-bs-dismiss="modal">Enviar mensaje</button></div></div></form></div></div>
+
+</body>
+</html>
