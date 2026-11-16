@@ -32,25 +32,24 @@ class AuthController extends Controller
         }
 
         session_regenerate_id(true);
+        $idUsuario = (int) $usuario['id_usuario'];
+        $esAdministrador = Usuario::tieneRolAdministrador($idUsuario);
+        $refugio = Refugio::buscarPorUsuario($idUsuario);
+        $rol = $esAdministrador ? 'admin' : (is_array($refugio) ? 'refugio' : 'usuario');
+
         $_SESSION['user'] = [
-            'id' => (int) $usuario['id_usuario'],
+            'id' => $idUsuario,
             'nombre' => trim((string) $usuario['nombres']) . ' ' . trim((string) $usuario['apellidos']),
-            'rol' => 'usuario',
+            'rol' => $rol,
             'email' => (string) $usuario['correo'],
-            'refugio_id' => null,
+            'refugio_id' => is_array($refugio) ? (int) $refugio['id_refugio'] : null,
         ];
 
-        $refugio = Refugio::buscarPorUsuario((int) $usuario['id_usuario']);
-        if (is_array($refugio)) {
-            $_SESSION['user']['rol'] = 'refugio';
-            $_SESSION['user']['refugio_id'] = (int) $refugio['id_refugio'];
-        }
-
-        $destino = 'dashboard';
-
-        if ($_SESSION['user']['rol'] === 'refugio') {
-            $destino = 'refugio/dashboard';
-        }
+        $destino = [
+            'usuario' => 'dashboard',
+            'refugio' => 'refugio/dashboard',
+            'admin' => 'admin/dashboard',
+        ][$rol];
 
         header('Location: ' . url($destino));
         exit;
@@ -76,11 +75,28 @@ class AuthController extends Controller
         $telefono = trim((string) ($_POST['telefono'] ?? ''));
         $correo = strtolower(trim((string) ($_POST['email'] ?? '')));
         $direccion = trim((string) ($_POST['direccion'] ?? ''));
+        $nombreAdmin = trim((string) ($_POST['nombre_admin'] ?? ''));
+        $correoAdmin = strtolower(trim((string) ($_POST['correo_admin'] ?? '')));
+        $documentoAdmin = trim((string) ($_POST['documento_admin'] ?? ''));
+        $passwordAdmin = (string) ($_POST['password_admin'] ?? '');
+        $confirmarPasswordAdmin = (string) ($_POST['confirm_password_admin'] ?? '');
         $password = (string) ($_POST['password'] ?? '');
         $confirmar = (string) ($_POST['confirm_password'] ?? '');
         $terminos = !empty($_POST['terminos']);
 
-        if ($nombres === '' || $documento === '' || $telefono === '' || $correo === '' || $direccion === '' || $password === '' || $confirmar === '') {
+        if ($nombres === ''
+            || $documento === ''
+            || $telefono === ''
+            || $correo === ''
+            || $direccion === ''
+            || $password === ''
+            || $confirmar === ''
+            || ($tipo === 'refugio'
+                && ($nombreAdmin === ''
+                    || $correoAdmin === ''
+                    || $documentoAdmin === ''
+                    || $passwordAdmin === ''
+                    || $confirmarPasswordAdmin === ''))) {
             $_SESSION['error'] = 'Todos los campos obligatorios deben completarse.';
             header('Location: ' . url('registro'));
             exit;
@@ -92,8 +108,18 @@ class AuthController extends Controller
             exit;
         }
 
-        if (!filter_var($correo, FILTER_VALIDATE_EMAIL) || strlen($password) < 8) {
-            $_SESSION['error'] = 'Ingresa un correo válido y una contraseña de al menos 8 caracteres.';
+        if ($tipo === 'refugio' && $passwordAdmin !== $confirmarPasswordAdmin) {
+            $_SESSION['error'] = 'La contraseña inicial del administrador no coincide.';
+            header('Location: ' . url('registro'));
+            exit;
+        }
+
+        if (!filter_var($correo, FILTER_VALIDATE_EMAIL)
+            || ($tipo === 'refugio' && !filter_var($correoAdmin, FILTER_VALIDATE_EMAIL))
+            || strlen($password) < 8
+            || ($tipo === 'refugio'
+                && (strlen($passwordAdmin) < 8 || !preg_match('/^\d{6,12}$/', $documentoAdmin)))) {
+            $_SESSION['error'] = 'Ingresa correos válidos, un documento de administrador de 6 a 12 dígitos y contraseñas de al menos 8 caracteres.';
             header('Location: ' . url('registro'));
             exit;
         }
@@ -136,10 +162,33 @@ class AuthController extends Controller
                     'correo' => $correo,
                     'documento' => $documento,
                     'tipo' => 'fundación',
+                    'nombre_contacto' => $nombreAdmin,
+                    'cargo_contacto' => 'Administrador',
+                    'correo_contacto' => $correoAdmin,
                 ], $usuarioId);
 
                 if ($refugioId === null) {
                     throw new RuntimeException('No fue posible crear el refugio.');
+                }
+
+                $administradorId = Usuario::crear([
+                    'nombres' => $nombreAdmin,
+                    'apellidos' => 'Administrador',
+                    'documento' => $documentoAdmin,
+                    'correo' => $correoAdmin,
+                    'password' => $passwordAdmin,
+                    'terminos' => 0,
+                ]);
+
+                if ($administradorId === null) {
+                    $pdo->rollBack();
+                    $_SESSION['error'] = 'El correo o documento del administrador ya están registrados.';
+                    header('Location: ' . url('registro'));
+                    exit;
+                }
+
+                if (!Refugio::agregarAdministrador($refugioId, $administradorId, $correoAdmin)) {
+                    throw new RuntimeException('No fue posible vincular al administrador con el refugio.');
                 }
             }
 

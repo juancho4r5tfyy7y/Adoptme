@@ -100,8 +100,12 @@ class SolicitudAdopcion
                     s.fecha_solicitud AS fecha,
                     s.motivo_adopcion AS motivo,
                     s.tipo_vivienda AS vivienda,
+                    s.tiene_patio,
                     s.estado_solicitud AS estado,
+                    s.observaciones AS motivo_rechazo,
                     m.nombre AS mascota_nombre,
+                    u.correo AS solicitante_correo,
+                    u.telefono AS solicitante_telefono,
                     CONCAT(u.nombres, " ", u.apellidos) AS solicitante
              FROM solicitudes_adopcion s
              INNER JOIN mascotas m ON m.id_mascota = s.id_mascota
@@ -112,6 +116,127 @@ class SolicitudAdopcion
         $consulta->execute([':id_refugio' => $idRefugio]);
 
         return $consulta->fetchAll();
+    }
+
+    public static function resolver(
+        int $idSolicitud,
+        int $idRefugio,
+        string $decision,
+        string $observaciones = ''
+    ): bool {
+        $observaciones = trim($observaciones);
+
+        if ($idSolicitud <= 0
+            || $idRefugio <= 0
+            || !in_array($decision, ['aprobar', 'rechazar'], true)
+            || ($decision === 'rechazar' && $observaciones === '')) {
+            return false;
+        }
+
+        $pdo = Database::conectar();
+        $pdo->beginTransaction();
+
+        try {
+            $consulta = $pdo->prepare(
+                'SELECT s.id_usuario, s.id_mascota, s.id_refugio,
+                        s.estado_solicitud, m.estado_adopcion
+                 FROM solicitudes_adopcion s
+                 INNER JOIN mascotas m ON m.id_mascota = s.id_mascota
+                                       AND m.id_refugio = s.id_refugio
+                 WHERE s.id_solicitud = :id_solicitud
+                   AND s.id_refugio = :id_refugio
+                 FOR UPDATE'
+            );
+            $consulta->execute([
+                ':id_solicitud' => $idSolicitud,
+                ':id_refugio' => $idRefugio,
+            ]);
+            $solicitud = $consulta->fetch();
+
+            if (!is_array($solicitud) || $solicitud['estado_solicitud'] !== 'pendiente') {
+                $pdo->rollBack();
+                return false;
+            }
+
+            if ($decision === 'aprobar') {
+                if ($solicitud['estado_adopcion'] !== 'disponible') {
+                    $pdo->rollBack();
+                    return false;
+                }
+
+                $actualizarOtras = $pdo->prepare(
+                    "UPDATE solicitudes_adopcion
+                     SET estado_solicitud = 'rechazada',
+                         fecha_respuesta = NOW(),
+                         observaciones = 'La mascota fue asignada a otra solicitud.'
+                     WHERE id_refugio = :id_refugio
+                       AND id_mascota = :id_mascota
+                       AND id_solicitud <> :id_solicitud
+                       AND estado_solicitud = 'pendiente'"
+                );
+                $actualizarOtras->execute([
+                    ':id_refugio' => $idRefugio,
+                    ':id_mascota' => (int) $solicitud['id_mascota'],
+                    ':id_solicitud' => $idSolicitud,
+                ]);
+            }
+
+            $estado = $decision === 'aprobar' ? 'aprobada' : 'rechazada';
+            $actualizar = $pdo->prepare(
+                'UPDATE solicitudes_adopcion
+                 SET estado_solicitud = :estado,
+                     fecha_respuesta = NOW(),
+                     observaciones = :observaciones
+                 WHERE id_solicitud = :id_solicitud
+                   AND id_refugio = :id_refugio
+                   AND estado_solicitud = :estado_pendiente'
+            );
+            $actualizar->execute([
+                ':estado' => $estado,
+                ':observaciones' => $decision === 'aprobar' ? null : $observaciones,
+                ':id_solicitud' => $idSolicitud,
+                ':id_refugio' => $idRefugio,
+                ':estado_pendiente' => 'pendiente',
+            ]);
+
+            if ($actualizar->rowCount() !== 1) {
+                $pdo->rollBack();
+                return false;
+            }
+
+            if ($decision === 'aprobar') {
+                $adopcion = $pdo->prepare(
+                    'INSERT INTO adopciones (
+                        id_solicitud,
+                        id_mascota,
+                        id_usuario,
+                        id_refugio,
+                        observaciones
+                     ) VALUES (
+                        :id_solicitud,
+                        :id_mascota,
+                        :id_usuario,
+                        :id_refugio,
+                        NULL
+                     )'
+                );
+                $adopcion->execute([
+                    ':id_solicitud' => $idSolicitud,
+                    ':id_mascota' => (int) $solicitud['id_mascota'],
+                    ':id_usuario' => (int) $solicitud['id_usuario'],
+                    ':id_refugio' => $idRefugio,
+                ]);
+            }
+
+            $pdo->commit();
+            return true;
+        } catch (Throwable $error) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+
+            throw $error;
+        }
     }
 
     public static function activa(int $idUsuario, int $idMascota): bool

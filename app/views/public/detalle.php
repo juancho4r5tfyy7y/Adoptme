@@ -17,7 +17,16 @@ $disp = $m['estado'] === 'disponible'; ?>
 <div class="<?= $user ? '' : 'container-xl pt-4' ?>">
   <nav class="small fw-bold text-secondary mb-3"><a href="<?= url('catalogo') ?>">Catálogo</a> / <span class="text-dark"><?= e($m['nombre']) ?></span></nav>
   <div class="row g-4">
-    <div class="col-lg-6"><div class="detail-photo"><?= mascota_img($m) ?></div></div>
+    <div class="col-lg-6">
+      <div class="detail-photo"><?= mascota_img($m) ?></div>
+      <?php if (count($m['fotos'] ?? []) > 1): ?>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+          <?php foreach (array_slice($m['fotos'], 1) as $indice => $foto): ?>
+            <img src="<?= e(asset('img/mascotas/' . $foto)) ?>" alt="Foto <?= $indice + 2 ?> de <?= e($m['nombre']) ?>" class="rounded-3" style="width: 84px; height: 84px; object-fit: cover;">
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+    </div>
     <div class="col-lg-6">
       <div class="d-flex justify-content-between align-items-start"><div><h1><?= e($m['nombre']) ?></h1><p class="text-secondary"><?= e($m['raza']) ?> · <?= e($refugio['nombre'] ?? '') ?> · <?= e($refugio['ciudad'] ?? '') ?></p></div>
         <button class="icon-btn pet-fav position-static" data-id="<?= $m['id'] ?>" <?= !$user ? 'data-login="' . url('login') . '"' : '' ?> aria-label="Favorito"><i class="bi bi-heart"></i></button></div>

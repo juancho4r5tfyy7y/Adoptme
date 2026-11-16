@@ -4,7 +4,7 @@ class CuentaController extends Controller
 {
     public function notificaciones(): void
     {
-        $this->render('comun/notificaciones', [
+        $this->render('notificaciones', [
             'titulo' => 'Notificaciones',
             'lista' => [],
         ]);

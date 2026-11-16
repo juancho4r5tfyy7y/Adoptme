@@ -30,7 +30,32 @@
 
 <section class="py-5"><div class="container-xl">
   <h2 class="mb-2">Mascotas que esperan un hogar</h2><p class="text-secondary mb-4">Una muestra de quienes están disponibles ahora mismo.</p>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"><?php foreach ($destacadas as $m) include APP_PATH . '/views/partials/pet_card.php'; ?></div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"><?php foreach ($destacadas as $m):
+    $meses = $m['edad_meses'] ?? null;
+    if ($meses === null) {
+        preg_match('/(\d+)\s*(mes|año)/', $m['edad'], $coincidencia);
+        $cantidad = (int) ($coincidencia[1] ?? 0);
+        $unidad = $coincidencia[2] ?? 'año';
+        $meses = $unidad === 'mes' ? $cantidad : $cantidad * 12;
+    }
+  ?>
+    <div class="col" data-pet data-nombre="<?= e($m['nombre']) ?>" data-raza="<?= e($m['raza']) ?>" data-especie="<?= e($m['especie']) ?>" data-tamano="<?= e($m['tamano']) ?>" data-estado="<?= e($m['estado']) ?>" data-meses="<?= (int) $meses ?>">
+      <article class="pet-card">
+        <div class="pet-photo"><?= mascota_img($m) ?>
+          <button class="icon-btn pet-fav" data-id="<?= $m['id'] ?>" <?= !$user ? 'data-login="' . url('login') . '"' : '' ?> aria-label="Favorito"><i class="bi bi-heart"></i></button></div>
+        <div class="p-3">
+          <div class="d-flex justify-content-between align-items-start gap-2">
+            <div><a class="stretched-link h5 mb-0 text-dark display-font" href="<?= url('mascota', ['id' => $m['id']]) ?>"><?= e($m['nombre']) ?></a>
+              <div class="small text-secondary"><?= e($m['raza']) ?> · <?= e($m['edad']) ?></div></div><?= badge($m['estado']) ?></div>
+          <div class="d-flex gap-1 mt-3 flex-wrap">
+            <span class="badge rounded-pill bg-body-secondary text-dark-emphasis fw-bold px-2 py-1 pet-tag"><?= e($m['especie']) ?></span>
+            <span class="badge rounded-pill bg-body-secondary text-dark-emphasis fw-bold px-2 py-1 pet-tag"><?= e($m['tamano']) ?></span>
+            <span class="badge rounded-pill bg-body-secondary text-dark-emphasis fw-bold px-2 py-1 pet-tag"><?= e($m['sexo']) ?></span>
+          </div>
+        </div>
+      </article>
+    </div>
+  <?php endforeach; ?></div>
   <div class="text-center mt-4"><a class="btn btn-dark" href="<?= url('catalogo') ?>">Ver catálogo completo</a></div>
 </div></section>
 

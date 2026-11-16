@@ -13,7 +13,11 @@
 </head>
 <body>
 <?php /** Gestión de mascotas del refugio (estado, publicación, edición, eliminación). */ ?>
-<div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Gestión de mascotas</h1><p class="text-secondary mb-0">Administra las mascotas de tu refugio</p></div><a class="btn btn-primary" href="<?= url('refugio/mascota-form') ?>"><i class="bi bi-plus-lg me-1"></i>Nueva mascota</a></div>
+<div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Gestión de mascotas</h1><p class="text-secondary mb-0">Administra las mascotas de tu refugio</p></div>
+<a class="btn btn-primary" href="<?= url('refugio/mascota-form') ?>">
+<i class="bi bi-plus-lg me-1">
+</i>Nueva mascota</a>
+</div>
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden"><div class="table-responsive"><table class="table table-hover mb-0 align-middle">
   <thead><tr><th>Mascota</th><th>Especie / Raza</th><th>Estado</th><th>Publicación</th><th>Acciones</th></tr></thead><tbody>
   <?php foreach ($mascotas as $m): ?><tr>

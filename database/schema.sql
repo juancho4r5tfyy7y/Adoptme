@@ -390,6 +390,9 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci
 COMMENT = 'Catálogo de roles del sistema – RN-2.2';
 
+INSERT IGNORE INTO `adopt_me`.`roles` (`nombre_rol`)
+VALUES ('Administrador'), ('Usuario'), ('Refugio');
+
 
 -- -----------------------------------------------------
 -- Table `adopt_me`.`usuarios_roles`
