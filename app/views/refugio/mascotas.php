@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de mascotas</title>
+  <link href="<?= asset('vendor/bootstrap-5.3.9-dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="<?= asset('css/adoptme.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/components.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/pages.css') ?>" rel="stylesheet">
+</head>
+<body>
 <?php /** Gestión de mascotas del refugio (estado, publicación, edición, eliminación). */ ?>
 <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Gestión de mascotas</h1><p class="text-secondary mb-0">Administra las mascotas de tu refugio</p></div><a class="btn btn-primary" href="<?= url('refugio/mascota-form') ?>"><i class="bi bi-plus-lg me-1"></i>Nueva mascota</a></div>
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden"><div class="table-responsive"><table class="table table-hover mb-0 align-middle">
@@ -14,3 +28,5 @@
         <button class="icon-btn" title="Eliminar" data-confirm="¿Seguro que deseas eliminar a <?= e($m['nombre']) ?>? No se puede deshacer." data-confirm-title="Eliminar mascota" data-remove="tr" data-toast="Mascota eliminada"><i class="bi bi-trash"></i></button>
       <?php else: ?><button class="icon-btn" title="Solo se eliminan mascotas disponibles o en borrador" data-msg="Solo puedes eliminar mascotas disponibles o en borrador"><i class="bi bi-trash opacity-50"></i></button><?php endif; ?>
     </div></td></tr><?php endforeach; ?></tbody></table></div></div>
+</body>
+</html>

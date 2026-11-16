@@ -4,9 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catalogo</title>
+  <link href="<?= asset('vendor/bootstrap-5.3.9-dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="<?= asset('css/adoptme.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/components.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/pages.css') ?>" rel="stylesheet">
 </head>
 <body>
-  <?php /** Catálogo con filtros (JS en el navegador). Si hay sesión se muestra dentro del panel. */ ?>
+  // Catálogo con filtros (JS en el navegador). Si hay sesión se muestra dentro del panel.
 <div class="<?= $user ? '' : 'container-xl pt-4' ?>">
   <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Catálogo de mascotas</h1><p class="text-secondary mb-0" id="f-count"></p></div></div>
   <div class="card border-0 shadow-sm rounded-4 p-3 mb-3"><div class="row g-2">

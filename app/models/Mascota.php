@@ -10,11 +10,6 @@ class Mascota
             return self::$cache;
         }
 
-        if (!USAR_BD) {
-            self::$cache = DatosDemo::mascotas();
-            return self::$cache;
-        }
-
         try {
             $consulta = Database::conectar()->query(
                 'SELECT
@@ -45,9 +40,8 @@ class Mascota
 
             return self::$cache;
         } catch (Throwable $error) {
-            // Se conserva la vista de demostración, pero el fallo queda registrado.
             error_log('ADOPT ME - No fue posible consultar las mascotas: ' . $error->getMessage());
-            self::$cache = DatosDemo::mascotas();
+            self::$cache = [];
             return self::$cache;
         }
     }
@@ -69,6 +63,130 @@ class Mascota
         }
 
         return null;
+    }
+
+    public static function guardar(array $datos, int $idRefugio): ?int
+    {
+        $nombre = trim((string) ($datos['nombre'] ?? ''));
+        $especie = trim((string) ($datos['especie'] ?? ''));
+        $raza = trim((string) ($datos['raza'] ?? ''));
+        $sexo = trim((string) ($datos['sexo'] ?? ''));
+        $descripcion = trim((string) ($datos['descripcion'] ?? ''));
+
+        if ($idRefugio <= 0 || $nombre === '' || $especie === '' || $raza === '' || $sexo === '' || $descripcion === '') {
+            return null;
+        }
+
+        $consulta = Database::conectar()->prepare(
+            'INSERT INTO mascotas (
+                id_refugio,
+                nombre,
+                especie,
+                raza,
+                edad_meses,
+                sexo,
+                tamanio,
+                vacunado,
+                esterilizado,
+                estado_salud_detalle,
+                compatibilidad_ninos,
+                compatibilidad_perros,
+                compatibilidad_gatos,
+                descripcion,
+                estado_adopcion,
+                estado_publicacion
+            ) VALUES (
+                :id_refugio,
+                :nombre,
+                :especie,
+                :raza,
+                :edad_meses,
+                :sexo,
+                :tamanio,
+                :vacunado,
+                :esterilizado,
+                :estado_salud_detalle,
+                :compatibilidad_ninos,
+                :compatibilidad_perros,
+                :compatibilidad_gatos,
+                :descripcion,
+                :estado_adopcion,
+                :estado_publicacion
+            )'
+        );
+
+        $resultado = $consulta->execute([
+            ':id_refugio' => $idRefugio,
+            ':nombre' => $nombre,
+            ':especie' => ucfirst($especie),
+            ':raza' => $raza,
+            ':edad_meses' => (int) ($datos['edad_meses'] ?? 0),
+            ':sexo' => strtolower($sexo),
+            ':tamanio' => strtolower((string) ($datos['tamanio'] ?? 'mediano')),
+            ':vacunado' => !empty($datos['vacunado']) ? 1 : 0,
+            ':esterilizado' => !empty($datos['esterilizado']) ? 1 : 0,
+            ':estado_salud_detalle' => trim((string) ($datos['estado_salud_detalle'] ?? '')),
+            ':compatibilidad_ninos' => !empty($datos['compatibilidad_ninos']) ? 1 : 0,
+            ':compatibilidad_perros' => !empty($datos['compatibilidad_perros']) ? 1 : 0,
+            ':compatibilidad_gatos' => !empty($datos['compatibilidad_gatos']) ? 1 : 0,
+            ':descripcion' => $descripcion,
+            ':estado_adopcion' => (string) ($datos['estado_adopcion'] ?? 'disponible'),
+            ':estado_publicacion' => (string) ($datos['estado_publicacion'] ?? 'borrador'),
+        ]);
+
+        if (!$resultado) {
+            return null;
+        }
+
+        self::$cache = null;
+        return (int) Database::conectar()->lastInsertId();
+    }
+
+    public static function actualizar(int $idMascota, array $datos, int $idRefugio): bool
+    {
+        $consulta = Database::conectar()->prepare(
+            'UPDATE mascotas SET
+                nombre = :nombre,
+                especie = :especie,
+                raza = :raza,
+                edad_meses = :edad_meses,
+                sexo = :sexo,
+                tamanio = :tamanio,
+                vacunado = :vacunado,
+                esterilizado = :esterilizado,
+                estado_salud_detalle = :estado_salud_detalle,
+                compatibilidad_ninos = :compatibilidad_ninos,
+                compatibilidad_perros = :compatibilidad_perros,
+                compatibilidad_gatos = :compatibilidad_gatos,
+                descripcion = :descripcion,
+                estado_adopcion = :estado_adopcion,
+                estado_publicacion = :estado_publicacion,
+                fecha_actualizacion = NOW()
+             WHERE id_mascota = :id_mascota AND id_refugio = :id_refugio'
+        );
+
+        $resultado = $consulta->execute([
+            ':nombre' => trim((string) ($datos['nombre'] ?? '')),
+            ':especie' => ucfirst(trim((string) ($datos['especie'] ?? ''))),
+            ':raza' => trim((string) ($datos['raza'] ?? '')),
+            ':edad_meses' => (int) ($datos['edad_meses'] ?? 0),
+            ':sexo' => strtolower(trim((string) ($datos['sexo'] ?? ''))),
+            ':tamanio' => strtolower(trim((string) ($datos['tamanio'] ?? 'mediano'))),
+            ':vacunado' => !empty($datos['vacunado']) ? 1 : 0,
+            ':esterilizado' => !empty($datos['esterilizado']) ? 1 : 0,
+            ':estado_salud_detalle' => trim((string) ($datos['estado_salud_detalle'] ?? '')),
+            ':compatibilidad_ninos' => !empty($datos['compatibilidad_ninos']) ? 1 : 0,
+            ':compatibilidad_perros' => !empty($datos['compatibilidad_perros']) ? 1 : 0,
+            ':compatibilidad_gatos' => !empty($datos['compatibilidad_gatos']) ? 1 : 0,
+            ':descripcion' => trim((string) ($datos['descripcion'] ?? '')),
+            ':estado_adopcion' => (string) ($datos['estado_adopcion'] ?? 'disponible'),
+            ':estado_publicacion' => (string) ($datos['estado_publicacion'] ?? 'borrador'),
+            ':id_mascota' => $idMascota,
+            ':id_refugio' => $idRefugio,
+        ]);
+
+        self::$cache = null;
+        return $resultado;
     }
 
     /** Convierte las columnas de la tabla mascotas al formato de las vistas actuales. */

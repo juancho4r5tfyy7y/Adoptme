@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AdoptMe</title>
+  <link href="<?= asset('vendor/bootstrap-5.3.9-dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="<?= asset('css/adoptme.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/components.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/pages.css') ?>" rel="stylesheet">
 </head>
 <body>
   // Página de inicio: propuesta de valor, mascotas destacadas, pasos y llamada a refugios.
@@ -11,7 +17,7 @@
   <div class="col-lg-6">
     <span class="badge rounded-pill text-bg-warning-subtle text-primary-emphasis px-3 py-2 fw-bold mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-heart-fill"></i> Plataforma de adopción responsable</span>
     <h1 class="display-5 fw-bolder mb-3">Adopta amor,<br>cambia vidas.</h1>
-    <p class="lead text-secondary mb-4 home-lead">ADOPT ME conecta refugios y familias en un solo lugar: encuentra a tu compañero, sigue tu solicitud paso a paso y olvídate de las hojas de cálculo dispersas.</p>
+    <p class="lead text-secondary mb-3 home-lead">ADOPT ME conecta refugios y familias en un solo lugar: encuentra a tu compañero ideal, realiza seguimiento transparente a tu solicitud paso a paso y olvídate de procesos dispersos.</p>
     <div class="d-flex gap-3 flex-wrap"><a class="btn btn-primary" href="<?= url('catalogo') ?>">Ver mascotas disponibles</a><a class="btn btn-outline-dark" href="<?= url('registro') ?>">Soy un refugio</a></div>
   </div>
   <div class="col-lg-6"><img src="<?= asset('img/mascotas/4.jpg') ?>" alt="Cuatro cachorros esperando un hogar" class="w-100 rounded-4 shadow-sm home-photo"></div>

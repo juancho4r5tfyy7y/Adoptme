@@ -33,7 +33,14 @@ class PublicController extends Controller
             return;
         }
 
-        $refugio = DatosDemo::porId(DatosDemo::refugios(), $mascota['refugio_id']);
+        $consulta = Database::conectar()->prepare(
+            'SELECT nombre_refugio AS nombre, direccion, telefono, correo, tipo_refugio AS tipo
+             FROM refugios
+             WHERE id_refugio = :id_refugio
+             LIMIT 1'
+        );
+        $consulta->execute([':id_refugio' => $mascota['refugio_id']]);
+        $refugio = $consulta->fetch() ?: null;
 
         $this->render('public/detalle', [
             'titulo' => $mascota['nombre'],

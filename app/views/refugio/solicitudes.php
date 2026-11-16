@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitudes del refugio</title>
+  <link href="<?= asset('vendor/bootstrap-5.3.9-dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="<?= asset('css/adoptme.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/components.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/pages.css') ?>" rel="stylesheet">
+</head>
+<body>
 <?php /** Solicitudes recibidas (solo lectura: la decisión la toma el administrador). */ ?>
 <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Solicitudes recibidas</h1><p class="text-secondary mb-0">Adoptantes interesados en tus mascotas</p></div></div>
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden"><div class="table-responsive"><table class="table table-hover mb-0 align-middle"><thead><tr><th>Solicitante</th><th>Mascota</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
@@ -10,3 +24,5 @@
   <div class="row g-2 my-3"><div class="col-6"><div class="bg-body-secondary rounded-3 p-3"><div class="small fw-bold text-uppercase text-secondary text-micro">Solicitante</div><div class="fw-bold"><?= e($s['solicitante']) ?></div></div></div><div class="col-6"><div class="bg-body-secondary rounded-3 p-3"><div class="small fw-bold text-uppercase text-secondary text-micro">Vivienda</div><div class="fw-bold"><?= e($s['vivienda']) ?></div></div></div></div>
   <p class="small"><b>Motivo:</b> <?= e($s['motivo']) ?></p><div class="text-end"><button class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button></div></div></div></div></div>
 <?php endforeach; ?>
+</body>
+</html>
