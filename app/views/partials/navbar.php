@@ -1,14 +1,14 @@
 <?php /** Barra superior. Muestra enlaces públicos o el menú de usuario según la sesión. */
 $actual = is_string($_GET['r'] ?? null) ? $_GET['r'] : 'home';
 $roles = ['usuario', 'refugio', 'admin'];
-$rolUsuario = is_array($user) && in_array($user['rol'] ?? null, $roles, true)
+$rolUsuarios = is_array($user) && in_array($user['rol'] ?? null, $roles, true)
     ? $user['rol']
     : 'usuario';
 $nombreUsuario = is_array($user) && is_string($user['nombre'] ?? null)
     ? $user['nombre']
     : 'Usuario';
-$nUnread = $user ? count(array_filter(DatosDemo::notificaciones($rolUsuario), fn($n) => !$n[3])) : 0;
-$perfil = ['usuario' => 'perfil', 'refugio' => 'refugio/perfil', 'admin' => 'admin/dashboard'][$rolUsuario];
+$nUnread = 0;
+$perfil = ['usuario' => 'perfil', 'refugio' => 'refugio/perfil', 'admin' => 'admin/dashboard'][$rolUsuarios];
 ?>
 <nav class="navbar navbar-expand-lg navbar-adopt">
   <div class="container-xl">
@@ -31,7 +31,7 @@ $perfil = ['usuario' => 'perfil', 'refugio' => 'refugio/perfil', 'admin' => 'adm
         <div class="dropdown">
           <button class="btn p-1 d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="avatar"><?= e(inicial($nombreUsuario)) ?></span>
-            <span class="d-none d-sm-block text-start lh-sm"><span class="d-block fw-bold small"><?= e($nombreUsuario) ?></span><span class="small text-secondary text-capitalize"><?= e($rolUsuario) ?></span></span>
+            <span class="d-none d-sm-block text-start lh-sm"><span class="d-block fw-bold small"><?= e($nombreUsuario) ?></span><span class="small text-secondary text-capitalize"><?= e($rolUsuarios) ?></span></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="<?= url($perfil) ?>"><i class="bi bi-person me-2"></i>Mi perfil</a></li>

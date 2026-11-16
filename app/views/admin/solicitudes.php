@@ -1,8 +1,8 @@
 <?php /** Aprobar o rechazar solicitudes (el rechazo exige motivo). */ ?>
 <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4"><div><h1 class="h2 mb-1">Gestión de solicitudes</h1><p class="text-secondary mb-0">Aprueba o rechaza las solicitudes de adopción</p></div></div>
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden"><div class="table-responsive"><table class="table table-hover mb-0 align-middle"><thead><tr><th>Solicitante</th><th>Mascota</th><th>Refugio</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
-<?php foreach ($solicitudes as $s): $p = Mascota::buscar($s['mascota_id']); $r = DatosDemo::porId(DatosDemo::refugios(), $s['refugio_id']); ?>
-<tr><td><?= e($s['solicitante']) ?></td><td><?= e($p['nombre'] ?? 'Mascota no encontrada') ?></td><td><?= e($r['nombre']) ?></td><td><?= e($s['fecha']) ?></td><td><?= badge($s['estado']) ?></td>
+<?php foreach ($solicitudes as $s): ?>
+<tr><td><?= e($s['solicitante']) ?></td><td><?= e($s['mascota_nombre']) ?></td><td><?= e($s['refugio_nombre']) ?></td><td><?= e($s['fecha']) ?></td><td><?= badge($s['estado']) ?></td>
   <td><div class="d-flex gap-2">
     <button class="icon-btn" title="Ver motivo" data-msg="<?= e($s['motivo']) ?>"><i class="bi bi-eye"></i></button>
     <?php if ($s['estado'] === 'pendiente'): ?>

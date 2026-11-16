@@ -265,169 +265,190 @@ class DatosDemo
         return $mascotas;
     }
 
+    // Datos demo deshabilitados para permitir registro real de usuarios, refugios y administradores.
+    // public static function refugios(): array
+    // {
+    //     return [
+    //         [
+    //             'id' => 1,
+    //             'nombre' => 'Huellas Felices',
+    //             'ciudad' => 'Medellín',
+    //             'tipo' => 'Fundación',
+    //             'anio' => 2015,
+    //             'contacto' => 'Camila Restrepo',
+    //             'cargo' => 'Coordinadora',
+    //             'correo' => 'camila@huellasfelices.org',
+    //             'telefono' => '(300) 123 4567',
+    //             'estado' => 'activo',
+    //         ],
+    //         [
+    //             'id' => 2,
+    //             'nombre' => 'Refugio Patitas',
+    //             'ciudad' => 'Bogotá',
+    //             'tipo' => 'Albergue',
+    //             'anio' => 2018,
+    //             'contacto' => 'Jorge Salas',
+    //             'cargo' => 'Director',
+    //             'correo' => 'jorge@patitas.org',
+    //             'telefono' => '(310) 987 6543',
+    //             'estado' => 'activo',
+    //         ],
+    //         [
+    //             'id' => 3,
+    //             'nombre' => 'Amigos Peludos',
+    //             'ciudad' => 'Cali',
+    //             'tipo' => 'Rescatista independiente',
+    //             'anio' => 2020,
+    //             'contacto' => 'Ana Ríos',
+    //             'cargo' => 'Fundadora',
+    //             'correo' => 'ana@amigospeludos.org',
+    //             'telefono' => '(320) 456 7890',
+    //             'estado' => 'activo',
+    //         ],
+    //     ];
+    // }
+
     public static function refugios(): array
     {
-        return [
-            [
-                'id' => 1,
-                'nombre' => 'Huellas Felices',
-                'ciudad' => 'Medellín',
-                'tipo' => 'Fundación',
-                'anio' => 2015,
-                'contacto' => 'Camila Restrepo',
-                'cargo' => 'Coordinadora',
-                'correo' => 'camila@huellasfelices.org',
-                'telefono' => '(300) 123 4567',
-                'estado' => 'activo',
-            ],
-            [
-                'id' => 2,
-                'nombre' => 'Refugio Patitas',
-                'ciudad' => 'Bogotá',
-                'tipo' => 'Albergue',
-                'anio' => 2018,
-                'contacto' => 'Jorge Salas',
-                'cargo' => 'Director',
-                'correo' => 'jorge@patitas.org',
-                'telefono' => '(310) 987 6543',
-                'estado' => 'activo',
-            ],
-            [
-                'id' => 3,
-                'nombre' => 'Amigos Peludos',
-                'ciudad' => 'Cali',
-                'tipo' => 'Rescatista independiente',
-                'anio' => 2020,
-                'contacto' => 'Ana Ríos',
-                'cargo' => 'Fundadora',
-                'correo' => 'ana@amigospeludos.org',
-                'telefono' => '(320) 456 7890',
-                'estado' => 'activo',
-            ],
-        ];
+        return [];
     }
+
+    // public static function usuarios(): array
+    // {
+    //     return [
+    //         [
+    //             'nombre' => 'María Gómez',
+    //             'email' => 'maria@ejemplo.com',
+    //             'telefono' => '(300) 111 2233',
+    //             'estado' => 'activo',
+    //             'fecha' => '2026-02-11',
+    //         ],
+    //         [
+    //             'nombre' => 'Carlos Pérez',
+    //             'email' => 'carlos@ejemplo.com',
+    //             'telefono' => '(310) 222 3344',
+    //             'estado' => 'activo',
+    //             'fecha' => '2026-03-02',
+    //         ],
+    //         [
+    //             'nombre' => 'Laura Torres',
+    //             'email' => 'laura@ejemplo.com',
+    //             'telefono' => '(320) 333 4455',
+    //             'estado' => 'inactivo',
+    //             'fecha' => '2026-04-19',
+    //         ],
+    //     ];
+    // }
 
     public static function usuarios(): array
     {
-        return [
-            [
-                'nombre' => 'María Gómez',
-                'email' => 'maria@ejemplo.com',
-                'telefono' => '(300) 111 2233',
-                'estado' => 'activo',
-                'fecha' => '2026-02-11',
-            ],
-            [
-                'nombre' => 'Carlos Pérez',
-                'email' => 'carlos@ejemplo.com',
-                'telefono' => '(310) 222 3344',
-                'estado' => 'activo',
-                'fecha' => '2026-03-02',
-            ],
-            [
-                'nombre' => 'Laura Torres',
-                'email' => 'laura@ejemplo.com',
-                'telefono' => '(320) 333 4455',
-                'estado' => 'inactivo',
-                'fecha' => '2026-04-19',
-            ],
-        ];
+        return [];
     }
+
+    // public static function solicitudes(): array
+    // {
+    //     return [
+    //         [
+    //             'id' => 101,
+    //             'mascota_id' => 1,
+    //             'solicitante' => 'María Gómez',
+    //             'refugio_id' => 1,
+    //             'estado' => 'pendiente',
+    //             'fecha' => '2026-08-01',
+    //             'vivienda' => 'Casa con patio',
+    //             'motivo' => 'Tengo experiencia con perros grandes y quiero darle un hogar a Luna.',
+    //         ],
+    //         [
+    //             'id' => 102,
+    //             'mascota_id' => 3,
+    //             'solicitante' => 'Carlos Pérez',
+    //             'refugio_id' => 1,
+    //             'estado' => 'pendiente',
+    //             'fecha' => '2026-08-03',
+    //             'vivienda' => 'Apartamento sin patio',
+    //             'motivo' => 'Busco un compañero leal para mis rutinas diarias.',
+    //         ],
+    //         [
+    //             'id' => 103,
+    //             'mascota_id' => 2,
+    //             'solicitante' => 'Laura Torres',
+    //             'refugio_id' => 2,
+    //             'estado' => 'aprobada',
+    //             'fecha' => '2026-07-20',
+    //             'vivienda' => 'Apartamento sin patio',
+    //             'motivo' => 'Simón sería ideal para mi apartamento tranquilo.',
+    //         ],
+    //         [
+    //             'id' => 104,
+    //             'mascota_id' => 7,
+    //             'solicitante' => 'María Gómez',
+    //             'refugio_id' => 1,
+    //             'estado' => 'rechazada',
+    //             'fecha' => '2026-06-14',
+    //             'vivienda' => 'Apartamento sin patio',
+    //             'motivo' => 'Me encantaría adoptar a Max.',
+    //             'motivo_rechazo' => 'Espacio insuficiente para un perro de talla grande.',
+    //         ],
+    //     ];
+    // }
 
     public static function solicitudes(): array
     {
-        return [
-            [
-                'id' => 101,
-                'mascota_id' => 1,
-                'solicitante' => 'María Gómez',
-                'refugio_id' => 1,
-                'estado' => 'pendiente',
-                'fecha' => '2026-08-01',
-                'vivienda' => 'Casa con patio',
-                'motivo' => 'Tengo experiencia con perros grandes y quiero darle un hogar a Luna.',
-            ],
-            [
-                'id' => 102,
-                'mascota_id' => 3,
-                'solicitante' => 'Carlos Pérez',
-                'refugio_id' => 1,
-                'estado' => 'pendiente',
-                'fecha' => '2026-08-03',
-                'vivienda' => 'Apartamento sin patio',
-                'motivo' => 'Busco un compañero leal para mis rutinas diarias.',
-            ],
-            [
-                'id' => 103,
-                'mascota_id' => 2,
-                'solicitante' => 'Laura Torres',
-                'refugio_id' => 2,
-                'estado' => 'aprobada',
-                'fecha' => '2026-07-20',
-                'vivienda' => 'Apartamento sin patio',
-                'motivo' => 'Simón sería ideal para mi apartamento tranquilo.',
-            ],
-            [
-                'id' => 104,
-                'mascota_id' => 7,
-                'solicitante' => 'María Gómez',
-                'refugio_id' => 1,
-                'estado' => 'rechazada',
-                'fecha' => '2026-06-14',
-                'vivienda' => 'Apartamento sin patio',
-                'motivo' => 'Me encantaría adoptar a Max.',
-                'motivo_rechazo' => 'Espacio insuficiente para un perro de talla grande.',
-            ],
-        ];
+        return [];
     }
+
+    // public static function notificaciones(string $rol): array
+    // {
+    //     $notificaciones = [
+    //         'usuario' => [
+    //             [
+    //                 'Tu solicitud por Luna fue recibida',
+    //                 'El refugio Huellas Felices la está revisando.',
+    //                 'Hace 2 días',
+    //                 false,
+    //                 'envelope',
+    //             ],
+    //             [
+    //                 'Solicitud por Max rechazada',
+    //                 'Espacio insuficiente para un perro de talla grande.',
+    //                 'Hace 3 semanas',
+    //                 true,
+    //                 'x-circle',
+    //             ],
+    //         ],
+    //         'refugio' => [
+    //             [
+    //                 'Nueva solicitud recibida',
+    //                 'María Gómez solicitó adoptar a Luna.',
+    //                 'Hace 2 días',
+    //                 false,
+    //                 'file-earmark-text',
+    //             ],
+    //             [
+    //                 'Nueva solicitud recibida',
+    //                 'Carlos Pérez solicitó adoptar a Rocky.',
+    //                 'Hace 1 día',
+    //                 false,
+    //                 'file-earmark-text',
+    //             ],
+    //         ],
+    //         'admin' => [
+    //             [
+    //                 'Nuevo refugio registrado',
+    //                 'Amigos Peludos completó su registro.',
+    //                 'Hace 1 semana',
+    //                 true,
+    //                 'building',
+    //             ],
+    //         ],
+    //     ];
+    //
+    //     return $notificaciones[$rol] ?? [];
+    // }
 
     public static function notificaciones(string $rol): array
     {
-        $notificaciones = [
-            'usuario' => [
-                [
-                    'Tu solicitud por Luna fue recibida',
-                    'El refugio Huellas Felices la está revisando.',
-                    'Hace 2 días',
-                    false,
-                    'envelope',
-                ],
-                [
-                    'Solicitud por Max rechazada',
-                    'Espacio insuficiente para un perro de talla grande.',
-                    'Hace 3 semanas',
-                    true,
-                    'x-circle',
-                ],
-            ],
-            'refugio' => [
-                [
-                    'Nueva solicitud recibida',
-                    'María Gómez solicitó adoptar a Luna.',
-                    'Hace 2 días',
-                    false,
-                    'file-earmark-text',
-                ],
-                [
-                    'Nueva solicitud recibida',
-                    'Carlos Pérez solicitó adoptar a Rocky.',
-                    'Hace 1 día',
-                    false,
-                    'file-earmark-text',
-                ],
-            ],
-            'admin' => [
-                [
-                    'Nuevo refugio registrado',
-                    'Amigos Peludos completó su registro.',
-                    'Hace 1 semana',
-                    true,
-                    'building',
-                ],
-            ],
-        ];
-
-        return $notificaciones[$rol] ?? [];
+        return [];
     }
 
     public static function porId(array $lista, int $id): ?array

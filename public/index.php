@@ -25,7 +25,7 @@ spl_autoload_register(static function (string $clase): void {
 
 $rutas = require APP_PATH . '/config/rutas.php';
 $ruta = $_GET['r'] ?? 'home';
-$usuario = $_SESSION['user'] ?? null;
+$usuarios = $_SESSION['user'] ?? null;
 
 // Evita errores si se envía una ruta como arreglo (?r[]=home).
 if (!is_string($ruta) || !isset($rutas[$ruta])) {
@@ -38,14 +38,14 @@ if (!is_string($ruta) || !isset($rutas[$ruta])) {
 
 // Control visual por rol. La autenticación real debe implementarse en el backend.
 if ($rolesPermitidos !== null) {
-    if (!is_array($usuario)) {
+    if (!is_array($usuarios)) {
         header('Location: ' . url('login'));
         exit;
     }
 
-    $rolUsuario = $usuario['rol'] ?? '';
+    $rolUsuarios = $usuarios['rol'] ?? '';
 
-    if (!in_array($rolUsuario, $rolesPermitidos, true)) {
+    if (!in_array($rolUsuarios, $rolesPermitidos, true)) {
         http_response_code(404);
         (new PublicController())->noEncontrado();
         exit;

@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalle</title>
+  <link href="<?= asset('vendor/bootstrap-5.3.9-dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="<?= asset('css/adoptme.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/components.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/pages.css') ?>" rel="stylesheet">
 </head>
 <body>
   <?php /** Detalle de una mascota. $m = mascota, $refugio = refugio responsable. */
@@ -29,7 +35,7 @@ $disp = $m['estado'] === 'disponible'; ?>
     </div>
   </div>
 </div>
-<div class="modal fade" id="contacto" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><form class="modal-content border-0 shadow-lg rounded-4" data-demo data-toast="Mensaje enviado al refugio" novalidate>
+<div class="modal fade" id="contacto" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><form class="modal-content border-0 shadow-lg rounded-4" method="post" action="<?= url('catalogo') ?>">
   <div class="modal-body p-4"><h3 class="h5">Contactar a <?= e($refugio['nombre'] ?? 'el refugio') ?></h3>
     <textarea class="form-control my-3" rows="4" required placeholder="Hola, quisiera más información sobre <?= e($m['nombre']) ?>..."></textarea>
     <div class="d-flex justify-content-end gap-2"><button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-primary" data-bs-dismiss="modal">Enviar mensaje</button></div></div></form></div></div>
