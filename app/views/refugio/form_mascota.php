@@ -30,7 +30,7 @@
   <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
-<form method="post" action="<?= url('refugio/mascota-post') ?>" class="row g-3">
+<form method="post" action="<?= url('refugio/mascota-post') ?>" enctype="multipart/form-data" class="row g-3">
   <?php if ($m): ?><input type="hidden" name="id_mascota" value="<?= (int) $m['id'] ?>"><?php endif; ?>
   <div class="col-lg-6">
     <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
@@ -76,6 +76,18 @@
         <div class="col-12">
           <label class="form-label fw-bold small">Descripción</label>
           <textarea name="descripcion" class="form-control" rows="3" required><?= $v('desc') ?></textarea>
+        </div>
+        <div class="col-12">
+          <label for="imagen" class="form-label fw-bold small">Fotos de la mascota</label>
+          <input id="imagen" name="imagen[]" type="file" class="form-control" accept="image/jpeg,image/png,image/webp" multiple <?= $m ? '' : 'required' ?>>
+          <div class="form-text"><?= $m ? 'Puedes agregar fotos JPG, PNG o WEBP (máximo 5 MB cada una).' : 'Selecciona al menos 2 fotos JPG, PNG o WEBP (máximo 5 MB cada una).' ?></div>
+          <?php if ($m && !empty($m['fotos'])): ?>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <?php foreach ($m['fotos'] as $indice => $foto): ?>
+                <img src="<?= e(asset('img/mascotas/' . $foto)) ?>" alt="Foto <?= $indice + 1 ?> de <?= e($m['nombre']) ?>" class="rounded-3" style="width: 84px; height: 84px; object-fit: cover;">
+              <?php endforeach; ?>
+            </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>

@@ -57,6 +57,25 @@ class Usuario
         return $consulta->fetchColumn() !== false;
     }
 
+    public static function tieneRolAdministrador(int $id): bool
+    {
+        if ($id <= 0) {
+            return false;
+        }
+
+        $consulta = Database::conectar()->prepare(
+            "SELECT 1
+             FROM usuarios_roles ur
+             INNER JOIN roles r ON r.id_rol = ur.id_rol
+             WHERE ur.id_usuario = :id
+               AND LOWER(r.nombre_rol) IN ('administrador', 'admin')
+             LIMIT 1"
+        );
+        $consulta->execute([':id' => $id]);
+
+        return $consulta->fetchColumn() !== false;
+    }
+
     public static function autenticar(string $correo, string $password): ?array
     {
         $usuario = self::buscarPorCorreo($correo);
@@ -121,7 +140,7 @@ class Usuario
                 :direccion,
                 :contrasena,
                 :terminos,
-                NOW()
+                CASE WHEN :fecha_aceptacion_terminos = 1 THEN NOW() ELSE NULL END
             )'
         );
 
@@ -134,6 +153,7 @@ class Usuario
             ':direccion' => $direccion,
             ':contrasena' => $contrasena,
             ':terminos' => $terminos,
+            ':fecha_aceptacion_terminos' => $terminos,
         ]);
 
         return (int) Database::conectar()->lastInsertId();

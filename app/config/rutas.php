@@ -35,7 +35,9 @@ return [
     'refugio/mascota-form' => ['RefugioController', 'formMascota', $rolRefugio],
     'refugio/mascota-post' => ['RefugioController', 'guardarMascota', $rolRefugio],
     'refugio/solicitudes' => ['RefugioController', 'solicitudes', $rolRefugio],
+    'refugio/solicitud-post' => ['RefugioController', 'procesarSolicitud', $rolRefugio],
     'refugio/perfil' => ['RefugioController', 'perfil', $rolRefugio],
+    'refugio/perfil-admin-post' => ['RefugioController', 'guardarAdministrador', $rolRefugio],
 
     // Administrador.
     'admin/dashboard' => ['AdminController', 'dashboard', $rolAdmin],

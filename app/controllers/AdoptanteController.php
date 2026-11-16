@@ -116,6 +116,20 @@ class AdoptanteController extends Controller
 
     public function perfil(): void
     {
-        $this->render('usuario/perfil', ['titulo' => 'Mi perfil']);
+        $usuario = $_SESSION['user'] ?? null;
+        $perfil = is_array($usuario) && !empty($usuario['id'])
+            ? Usuario::buscarPorId((int) $usuario['id'])
+            : null;
+
+        if (!is_array($perfil)) {
+            $_SESSION['error'] = 'No fue posible cargar la información del perfil.';
+            header('Location: ' . url('login'));
+            exit;
+        }
+
+        $this->render('usuario/perfil', [
+            'titulo' => 'Mi perfil',
+            'perfil' => $perfil,
+        ]);
     }
 }

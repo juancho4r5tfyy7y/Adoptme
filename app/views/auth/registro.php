@@ -21,6 +21,29 @@
           <label class="form-label fw-bold small"><?= $rol === 'usuarios' ? 'Nombre completo' : 'Nombre de la organización' ?></label>
           <input name="nombre" class="form-control" required placeholder="<?= $rol === 'usuarios' ? 'Ej. Ana Pérez' : 'Ej. Refugio Esperanza' ?>">
         </div>
+        <?php if ($rol === 'refugio'): ?>
+          <div class="col-sm-6">
+            <label class="form-label fw-bold small">Nombre del administrador del refugio</label>
+            <input name="nombre_admin" class="form-control" required placeholder="Nombre de la persona responsable">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label fw-bold small">Correo del administrador</label>
+            <input name="correo_admin" type="email" class="form-control" required placeholder="admin@refugio.com">
+            <div class="form-text">Se usará para iniciar sesión con la contraseña inicial.</div>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label fw-bold small">Documento del administrador</label>
+            <input name="documento_admin" class="form-control" required pattern="\d{6,12}" placeholder="Ej. 10203040">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label fw-bold small">Contraseña inicial del administrador</label>
+            <input name="password_admin" type="password" class="form-control" required minlength="8">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label fw-bold small">Confirmar contraseña inicial</label>
+            <input name="confirm_password_admin" type="password" class="form-control" required minlength="8">
+          </div>
+        <?php endif; ?>
         <?php if ($rol === 'usuarios'): ?>
           <div class="col-sm-6">
             <label class="form-label fw-bold small">Documento</label>
